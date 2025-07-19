@@ -132,13 +132,15 @@ function App() {
           )}
           
           <Grid container spacing={4}>
-            <Grid item xs={12} lg={5}>
+            <Grid item xs={12} lg={4}>
               <Box sx={{ 
                 background: 'linear-gradient(135deg, #fff5f5 0%, #f0f9ff 100%)',
                 p: 3,
                 borderRadius: 3,
                 boxShadow: 3,
-                height: 'fit-content'
+                height: 'fit-content',
+                position: 'sticky',
+                top: 20
               }}>
                 <Typography variant="h5" sx={{ mb: 3, fontWeight: 600, color: 'primary.main' }}>
                   👤 User Management
@@ -182,17 +184,21 @@ function App() {
               </Box>
             </Grid>
             
-            <Grid item xs={12} lg={7}>
-              <Box sx={{ mb: 4 }}>
-                <Typography variant="h5" sx={{ mb: 2, fontWeight: 600, color: 'primary.main' }}>
-                  🏅 Leaderboard
-                </Typography>
-                <Leaderboard users={users} />
-              </Box>
-            </Grid>
-            
-            <Grid item xs={12}>
-              <History history={history} />
+            <Grid item xs={12} lg={8}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ mb: 3 }}>
+                    <Typography variant="h5" sx={{ mb: 2, fontWeight: 600, color: 'primary.main' }}>
+                      🏅 Leaderboard
+                    </Typography>
+                    <Leaderboard users={users} />
+                  </Box>
+                </Grid>
+                
+                <Grid item xs={12} md={3}>
+                  <History history={history} />
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Paper>
