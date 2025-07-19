@@ -139,8 +139,8 @@ function App() {
                 borderRadius: 3,
                 boxShadow: 3,
                 height: 'fit-content',
-                position: 'sticky',
-                top: 20
+                position: { lg: 'sticky' },
+                top: { lg: 20 }
               }}>
                 <Typography variant="h5" sx={{ mb: 3, fontWeight: 600, color: 'primary.main' }}>
                   👤 User Management
@@ -186,8 +186,8 @@ function App() {
             
             <Grid item xs={12} lg={8}>
               <Grid container spacing={3}>
-                <Grid item xs={12} md={4}>
-                  <Box sx={{ mb: 3 }}>
+                <Grid item xs={12} md={6} lg={6}>
+                  <Box sx={{ mb: { xs: 3, md: 0 } }}>
                     <Typography variant="h5" sx={{ mb: 2, fontWeight: 600, color: 'primary.main' }}>
                       🏅 Leaderboard
                     </Typography>
@@ -195,7 +195,7 @@ function App() {
                   </Box>
                 </Grid>
                 
-                <Grid item xs={12} md={3}>
+                <Grid item xs={12} md={6} lg={6}>
                   <History history={history} />
                 </Grid>
               </Grid>
