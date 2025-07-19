@@ -89,18 +89,60 @@ function App() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
-      <Paper elevation={3} sx={{ p: 3, transition: 'box-shadow 0.3s', '&:hover': { boxShadow: 8 } }}>
-        <Typography variant="h4" align="center" gutterBottom>
-          User Points Claim & Leaderboard
-        </Typography>
-        {error && <Typography color="error">{error}</Typography>}
-        <Box sx={{ mt: 4 }}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              {/* User List and Add User */}
-              <Box mb={2}>
-                <Typography variant="h6">Select User</Typography>
+    <Box sx={{ 
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      py: 4
+    }}>
+      <Container maxWidth="lg" sx={{ mt: 2 }}>
+        <Paper 
+          elevation={8} 
+          sx={{ 
+            p: 4, 
+            borderRadius: 4,
+            background: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
+          }}
+        >
+          <Box sx={{ textAlign: 'center', mb: 4 }}>
+            <Typography 
+              variant="h3" 
+              sx={{ 
+                fontWeight: 700,
+                background: 'linear-gradient(45deg, #667eea, #764ba2)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                mb: 1
+              }}
+            >
+              🏆 Points Leaderboard
+            </Typography>
+            <Typography variant="body1" color="text.secondary" sx={{ opacity: 0.8 }}>
+              Claim points and compete for the top spot!
+            </Typography>
+          </Box>
+          
+          {error && (
+            <Box sx={{ mb: 3, p: 2, borderRadius: 2, bgcolor: 'error.light', color: 'error.contrastText' }}>
+              <Typography variant="body2">{error}</Typography>
+            </Box>
+          )}
+          
+          <Grid container spacing={4}>
+            <Grid item xs={12} lg={5}>
+              <Box sx={{ 
+                background: 'linear-gradient(135deg, #fff5f5 0%, #f0f9ff 100%)',
+                p: 3,
+                borderRadius: 3,
+                boxShadow: 3,
+                height: 'fit-content'
+              }}>
+                <Typography variant="h5" sx={{ mb: 3, fontWeight: 600, color: 'primary.main' }}>
+                  👤 User Management
+                </Typography>
                 <UserList
                   users={users}
                   selectedUser={selectedUser}
@@ -108,36 +150,54 @@ function App() {
                   onAddUser={handleAddUser}
                   adding={adding}
                 />
-              </Box>
-              {/* Claim Button */}
-              <Box mb={2}>
-                <ClaimButton
-                  userId={selectedUser}
-                  onClaim={handleClaim}
-                  disabled={!selectedUser || claiming}
-                />
-                {claiming && <CircularProgress size={24} sx={{ ml: 2, verticalAlign: 'middle' }} />}
-                <Fade in={lastClaimPoints !== null} timeout={{ enter: 500, exit: 500 }} unmountOnExit>
-                  <Typography sx={{ mt: 1 }} color="primary">
-                    You claimed {lastClaimPoints} points!
-                  </Typography>
-                </Fade>
+                <Box sx={{ mt: 3 }}>
+                  <ClaimButton
+                    userId={selectedUser}
+                    onClaim={handleClaim}
+                    disabled={!selectedUser || claiming}
+                  />
+                  {claiming && (
+                    <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
+                      <CircularProgress size={20} sx={{ mr: 1 }} />
+                      <Typography variant="body2" color="text.secondary">
+                        Claiming points...
+                      </Typography>
+                    </Box>
+                  )}
+                  <Fade in={lastClaimPoints !== null} timeout={{ enter: 500, exit: 500 }} unmountOnExit>
+                    <Box sx={{ 
+                      mt: 2, 
+                      p: 2, 
+                      borderRadius: 2, 
+                      bgcolor: 'success.light', 
+                      color: 'success.contrastText',
+                      textAlign: 'center'
+                    }}>
+                      <Typography variant="h6" fontWeight={600}>
+                        🎉 You claimed {lastClaimPoints} points!
+                      </Typography>
+                    </Box>
+                  </Fade>
+                </Box>
               </Box>
             </Grid>
-            <Grid item xs={12} md={6}>
-              {/* Leaderboard */}
-              <Typography variant="h6">Leaderboard</Typography>
-              <Leaderboard users={users} />
+            
+            <Grid item xs={12} lg={7}>
+              <Box sx={{ mb: 4 }}>
+                <Typography variant="h5" sx={{ mb: 2, fontWeight: 600, color: 'primary.main' }}>
+                  🏅 Leaderboard
+                </Typography>
+                <Leaderboard users={users} />
+              </Box>
             </Grid>
+            
             <Grid item xs={12}>
-              {/* History */}
-              <Typography variant="h6">Claim History</Typography>
               <History history={history} />
             </Grid>
           </Grid>
-        </Box>
-      </Paper>
-    </Container>
+        </Paper>
+      </Container>
+    </Box>
   );
 }
 
